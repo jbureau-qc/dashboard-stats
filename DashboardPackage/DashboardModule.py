@@ -1,8 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+#from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.support.ui import WebDriverWait
+#from selenium.webdriver.support import expected_conditions as EC
+#from selenium.common.exceptions import TimeoutException
 from cryptography.fernet import Fernet
 import pyautogui
 import os, sys
@@ -27,12 +29,12 @@ def setup_driver():
 #    chrome_options.add_argument("--disable-session-crashed-bubble")	
     workDir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
     if os.name == "nt":
-        driver = webdriver.Chrome(workDir + "/Resources/chromedriver.exe", options=chrome_options)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     else:
-        print "Exporting Display..."
+        print("Exporting Display...")
         os.environ["DISPLAY"] = ":0.0"
-        print "Starting Chrome"        
-        driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver", options=chrome_options)
+        print("Starting Chrome")        
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         pyautogui.FAILSAFE=False
         pyautogui.moveTo(1980, 1080)
 
