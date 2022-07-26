@@ -28,6 +28,7 @@ sudo dpkg -i Resources/chromium.deb
 echo -ne '>>>>>>>>>>>>>>            [60%]\r'
 echo "Password & Shortcuts..."
 
+echo -ne 'Enter password: '
 read pw
 python ~/Dashboard/DashboardPackage/CryptHandler.py $pw > Resources/password
 sudo cp Resources/kiosk.desktop /etc/xdg/autostart/kiosk.desktop
