@@ -68,14 +68,14 @@ def open_sb_stats():
 
 def open_grafana():
     print("opening grafana")
-    driver.get("https://grafana-sam.stingray-private.com/login")
+    driver.get("https://grafana.business.stingray.com/login")
     element = driver.find_element_by_name("username")
     element.send_keys("jbureau")
     element = driver.find_element_by_name("password")
     element.send_keys(password)
     element.send_keys(Keys.RETURN)
     handle_alert(driver)
-    driver.get("https://grafana-sam.stingray-private.com/playlists/play/1?kiosk&autofitpanels")
+    driver.get("https://grafana.business.stingray.com/d/cSDSMG57k/ad-manager?orgId=1&from=now-3h&to=now&var-Environment=prod&kiosk&autofitpanels")
     
 def open_jira():    
     print("opening jira")  
