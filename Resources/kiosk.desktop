@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=kiosk
+Type=Application
+Exec=/home/pi/Dashboard/Resources/watcher.sh
+Terminal=false
