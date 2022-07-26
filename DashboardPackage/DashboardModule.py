@@ -1,10 +1,10 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.support.ui import WebDriverWait
-#from selenium.webdriver.support import expected_conditions as EC
-#from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from cryptography.fernet import Fernet
 import pyautogui
 import os, sys
@@ -14,7 +14,12 @@ password = "password"
 
 def setup_driver():
     global driver
-    chrome_options = webdriver.ChromeOptions()
+    chrome_options = Options()
+    # browser is Chromium instead of Chrome
+    chrome_options.BinaryLocation = "/usr/bin/chromium-browser"
+    # we use custom chromedriver for raspberry
+    driver_path = "/usr/bin/chromedriver"
+    
     prefs = {"credentials_enable_service", False}
     prefs = {"profile.password_manager_enabled" : False}
     chrome_options.add_experimental_option("prefs", prefs)
@@ -29,12 +34,12 @@ def setup_driver():
 #    chrome_options.add_argument("--disable-session-crashed-bubble")	
     workDir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
     if os.name == "nt":
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options, service=Service(driver_path))
     else:
         print("Exporting Display...")
         os.environ["DISPLAY"] = ":0.0"
         print("Starting Chrome")        
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options, service=Service(driver_path))
         pyautogui.FAILSAFE=False
         pyautogui.moveTo(1980, 1080)
 

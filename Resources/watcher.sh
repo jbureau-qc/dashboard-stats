@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/pi/Dashboard/DashboardPackage/
+cd /home/pi/Dashboard/dashboard-stats/DashboardPackage/
 
 export DISPLAY=:0.0
 
