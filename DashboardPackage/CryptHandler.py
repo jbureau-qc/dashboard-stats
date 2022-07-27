@@ -1,9 +1,9 @@
 from cryptography.fernet import Fernet
-from os.path import exists
+from os.path import exists, expanduser
 import sys
 
 def get_key():
-    path = "~/Dashboard/dashboard-stats/DashboardPackage/key"    
+    path = expanduser("~") + "/Dashboard/dashboard-stats/DashboardPackage/key"    
     if (exists(path)):
        with open(path, "rb") as f:
           key = f.read()

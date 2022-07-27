@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from cryptography.fernet import Fernet
+from os.path import expanduser
 import pyautogui
 import os, sys
 
@@ -44,7 +45,8 @@ def setup_driver():
         pyautogui.moveTo(1980, 1080)
 
 def decrypt_password(data):
-    with open("~/Dashboard/dashboard-stats/DashboardPackage/key", "rb") as f:
+    path = expanduser("~") + "/Dashboard/dashboard-stats/DashboardPackage/key"
+    with open(path, "rb") as f:
        key = f.read()
     f = Fernet(key)
     decrypted = f.decrypt(data)
