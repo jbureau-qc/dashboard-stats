@@ -44,9 +44,10 @@ def setup_driver():
         pyautogui.moveTo(1980, 1080)
 
 def decrypt_password(data):
-    split = str(data).split(":")
-    f = Fernet(split[0])
-    decrypted = f.decrypt(split[1])
+    with open("~/Dashboard/dashboard-stats/DashboardPackage/key", "rb") as f:
+       key = f.read()
+    f = Fernet(key)
+    decrypted = f.decrypt(data)
     return decrypted
       
 def load_settings():
